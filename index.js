@@ -1,7 +1,7 @@
-/*Gets User Input*/
-let playerInput = window.prompt("Rock Paper Scissor Shoot!");
-
-playerInput = capitalize(playerInput);
+/*Game Counters*/
+let playerCounter = 0;
+let computerCounter = 0;
+let gameNumber = 1;
 
 /*Changed Input Into Proper Capitalization*/
 function capitalize(x) {
@@ -12,14 +12,57 @@ function capitalize(x) {
     x += y;
     return x;
 }
+    /*Introduction*/
+    let playerName = window.prompt("What Is Your Name?");
+    alert(`Hey ${playerName}! We're Playing Rock Paper Scissor. First To Five Points Wins!`)
 
- /*Checks If Input Is Correct*/
- while(playerInput != "Rock" && playerInput != "Paper" && playerInput != "Sicssors"){
-        console.log("Please Enter A Valid Input!");
+while (computerCounter < 5 && playerCounter < 5){
+
+
+    /*Gets User Input*/
+    let playerInput = window.prompt(`Game Number ${gameNumber}! Rock Paper Scissor Shoot!`);
+
+    playerInput = capitalize(playerInput);
+
+    /*Checks If Input Is Correct*/
+    while (playerInput == "") {
+        console.log("You Wrote Nothing")
         playerInput = window.prompt("Rock Paper Scissor Shoot!");
         playerInput = capitalize(playerInput);
+    } 
+    while(playerInput != "Rock" && playerInput != "Paper" && playerInput != "Scissor"){
+            console.log("Please Enter A Valid Input!");
+            playerInput = window.prompt("Rock Paper Scissor Shoot!");
+            playerInput = capitalize(playerInput);
+        }
+
+    /*Computer Options And A Function To Pick Randomly*/
+    let computerOptions = ["Rock", "Paper", "Scissor"];
+
+    computerChoice = computerOptions[Math.floor(Math.random() * 3)];
+
+    /*Condition To Decide Game Outcome And Increase Counters*/
+    if (computerChoice == playerInput) {
+        console.log(`Computer Also Chose ${computerChoice}. That Was A Tie.`);
+        gameNumber ++;
+    }
+    else if ((computerChoice == "Rock" && playerInput == "Scissor") || (computerChoice == "Scissor" && playerInput == "Paper") || (computerChoice == "Paper" && playerInput == "Rock")) {
+        console.log(`Computer Chose ${computerChoice}! Computer Gets A Point!`);
+        gameNumber ++;
+        computerCounter ++;
     }
 
-/*let computerChoices = ["Rock", "Paper", "Scissor"];
+    else {
+        console.log(`Computer Chose ${computerChoice}! You Get A Point!`);
+        gameNumber ++;
+        playerCounter ++;
+    }
+}
+/*Final Game Decision*/
+if (playerCounter == 5) {
+    console.log(`Congratulations! YOU WIN ${playerName}`);
+}
 
-console.log(computerChoices[0]);*/
+else {
+    console.log(`Too Bad. You Lost ${playerName}!`)
+}
