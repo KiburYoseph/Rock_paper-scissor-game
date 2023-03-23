@@ -1,17 +1,25 @@
+/*Gets User Input*/
 let playerInput = window.prompt("Rock Paper Scissor Shoot!");
 
-function capitalize(string) {
-    let y = string.slice(1, string.length);
-    y = y.toLowerCase();
-    string = string.slice(0,1);
-    string = string.toUpperCase();
-    string += y;
-    return string;
-}
- capitalize(playerInput);
+playerInput = capitalize(playerInput);
 
- if (playerInput != "Rock" && playerInput != "Paper" && playerInput != "Sicssors") {
-    console.log("Please Enter A Valid Input!")
-    playerInput = window.prompt("Rock Paper Scissor Shoot!");
-    capitalize(playerInput);
- }
+/*Changed Input Into Proper Capitalization*/
+function capitalize(x) {
+    let y = x.slice(1, x.length);
+    y = y.toLowerCase();
+    x = x.slice(0,1);
+    x = x.toUpperCase();
+    x += y;
+    return x;
+}
+
+ /*Checks If Input Is Correct*/
+ while(playerInput != "Rock" && playerInput != "Paper" && playerInput != "Sicssors"){
+        console.log("Please Enter A Valid Input!");
+        playerInput = window.prompt("Rock Paper Scissor Shoot!");
+        playerInput = capitalize(playerInput);
+    }
+
+/*let computerChoices = ["Rock", "Paper", "Scissor"];
+
+console.log(computerChoices[0]);*/
