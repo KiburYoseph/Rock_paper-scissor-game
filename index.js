@@ -1,8 +1,9 @@
 /*Game Counters*/
+let playerName = "Player"
 let playerCounter = 0;
 let computerCounter = 0;
 let gameNumber = 1;
-
+let input = document.getElementById("nameInput")
 /*Changed Input Into Proper Capitalization*/
 function capitalize(x) {
     let y = x.slice(1, x.length);
@@ -12,9 +13,19 @@ function capitalize(x) {
     x += y;
     return x;
 }
+
     /*Introduction*/
-    let playerName = window.prompt("What Is Your Name?");
-    alert(`Hey ${playerName}! We're Playing Rock Paper Scissor. First To Five Points Wins!`)
+    /*document.getElementById("nameButton").onclick = function(){
+        if (input.value = ""){
+            document.getElementById("nameIntro").innerHTML = "You wrote nothing. Please Enter A Name:"
+        }
+        else{
+            let playerName = input.value;
+            document.getElementById("nameIntro").innerHTML = playerName;
+            console.log(playerName)
+        }
+    }
+    /*alert(`Hey ${playerName}! We're Playing Rock Paper Scissor. First To Five Points Wins!`)*/
 
 while (computerCounter < 5 && playerCounter < 5){
 
@@ -59,10 +70,12 @@ while (computerCounter < 5 && playerCounter < 5){
     }
 }
 /*Final Game Decision*/
+let differencePlayer = playerCounter - computerCounter;
+let differenceComputer = computerCounter - playerCounter;
 if (playerCounter == 5) {
-    console.log(`Congratulations! YOU WIN ${playerName}`);
+    console.log(`Congratulations! YOU WON ${playerName}. You beat me by ${differencePlayer} points!`);
 }
 
 else {
-    console.log(`Too Bad. You Lost ${playerName}!`)
+    console.log(`Too Bad. You Lost by ${differenceComputer} points ${playerName}!`)
 }
