@@ -70,8 +70,12 @@ while (computerCounter < 5 && playerCounter < 5){
     }
 }
 /*Final Game Decision*/
-let differencePlayer = playerCounter - computerCounter;
-let differenceComputer = computerCounter - playerCounter;
+let difference = playerCounter - computerCounter;
+
+if (difference < 0) {
+    difference = difference + 2(-1 * difference)
+}
+
 if (playerCounter == 5) {
     console.log(`Congratulations! YOU WON ${playerName}. You beat me by ${differencePlayer} points!`);
 }
