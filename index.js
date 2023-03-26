@@ -1,5 +1,5 @@
 /*Game Counters*/
-let playerName = "Player"
+let playerName;
 let playerCounter = 0;
 let computerCounter = 0;
 let gameNumber = 1;
@@ -13,24 +13,28 @@ function capitalize(x) {
     x += y;
     return x;
 }
+
 /*Checks Game Outcome*/
 function gameOutcome(playerInput) { 
     let computerOptions = ["Rock", "Paper", "Scissor"];
     computerChoice = computerOptions[Math.floor(Math.random() * 3)];
 
     if (computerChoice == playerInput) {
-        return console.log(`Computer Also Chose ${computerChoice}. That Was A Tie.`),
-            gameNumber ++;
+        return document.getElementById("outcomeInfo").innerHTML = `Computer Also Chose ${computerChoice}. That Was A Tie.`,
+            gameNumber ++, 
+            document.getElementById("outcomeInfo").style.display = "flex";
     }
     else if ((computerChoice == "Rock" && playerInput == "Scissor") || (computerChoice == "Scissor" && playerInput == "Paper") || (computerChoice == "Paper" && playerInput == "Rock")) {
-        return console.log(`Computer Chose ${computerChoice}! Computer Gets A Point!`),
+        return document.getElementById("outcomeInfo").innerHTML = `Computer Chose ${computerChoice}! Computer Gets A Point!`,
             gameNumber ++,
-            computerCounter ++;
+            computerCounter ++, 
+            document.getElementById("outcomeInfo").style.display = "flex";
     }
     else {
-        return console.log(`Computer Chose ${computerChoice}! You Get A Point!`), 
+        return document.getElementById("outcomeInfo").innerHTML = `Computer Chose ${computerChoice}! You Get A Point!`, 
             gameNumber ++, 
-            layerCounter ++;
+            playerCounter ++, 
+            document.getElementById("outcomeInfo").style.display = "flex";
     }
 }
 
@@ -46,6 +50,7 @@ function gameOutcome(playerInput) {
             document.getElementById("introSection").style.display = "flex";
             document.getElementById("introduction").innerHTML = `Hey ${playerName}! We're Playing Rock Paper Scissor. First To Five Points Wins!`
             console.log(`Player's Name Is: ${playerName}`)
+            document.getElementById("playerName").innerHTML = `${playerName}`;
         }
     }
 
@@ -53,29 +58,54 @@ function gameOutcome(playerInput) {
         document.getElementById("introSection").style.display = "none";
         document.getElementById("gameplaySection").style.display = "flex";  
     }
-    while (computerCounter < 5 && playerCounter < 5){
+
         /*Gets User Input*/
         document.getElementById("rockButton").onclick = function(){
             gameOutcome("Rock");
+            document.getElementById("gameInfo").innerHTML = `Game Number:${gameNumber}. Rock Paper Scissor Shoot`
+            if (playerCounter == 5 || computerCounter == 5){
+                finalDecision();
+            }
         }
         document.getElementById("paperButton").onclick = function(){
             gameOutcome("Paper");
+            document.getElementById("gameInfo").innerHTML = `Game Number:${gameNumber}. Rock Paper Scissor Shoot`
+            if (playerCounter == 5 || computerCounter == 5){
+            finalDecision();
+            }
         }
         document.getElementById("scissorButton").onclick = function(){
             gameOutcome("Scissor");
+            document.getElementById("gameInfo").innerHTML = `Game Number:${gameNumber}. Rock Paper Scissor Shoot`
+            if (playerCounter == 5 || computerCounter == 5){
+                finalDecision();
+            }
         }
+
+/*Final Game Decision*/
+function finalDecision(){
+    let difference = playerCounter - computerCounter;
+
+    if (playerCounter == 5) {
+        return document.getElementById("gameplaySection").style.display = "none",
+        playerName = input.value,
+        document.getElementById("finalResult").style.display = "flex", 
+        document.getElementById("playerName2").innerHTML = `${playerName}`,
+        document.getElementById("resultInfo").innerHTML = `Congratulations! YOU'VE WON ${playerName}.<br> You beat me by ${difference} points!`;  
     }
-/*Final Game Decision
-let difference = playerCounter - computerCounter;
 
-if (difference < 0) {
-    difference = difference + 2(-1 * difference)
+    else if (computerCounter == 5) {
+        return document.getElementById("gameplaySection").style.display = "none", 
+            playerName = input.value,
+            document.getElementById("finalResult").style.display = "flex", 
+            difference = difference + 2*(-1 * difference), 
+            document.getElementById("playerName2").innerHTML = `${playerName}`,
+            document.getElementById("resultInfo").innerHTML = `Too Bad. You Lost by ${difference} points ${playerName}!`;
+    }
 }
 
-if (playerCounter == 5) {
-    console.log(`Congratulations! YOU WON ${playerName}. You beat me by ${differencePlayer} points!`);
-}
 
-else {
-    console.log(`Too Bad. You Lost by ${differenceComputer} points ${playerName}!`)
-}*/
+
+    
+
+
